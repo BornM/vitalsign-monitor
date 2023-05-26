@@ -1,0 +1,1235 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 1,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "grafana-timestream-datasource",
+          "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "index": 1,
+                    "text": "No Prediction Alarm"
+                  },
+                  "-1": {
+                    "index": 0,
+                    "text": "Instability Alarm"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "dark-red",
+                  "value": -1
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 0,
+          "y": 0
+        },
+        "id": 8,
+        "interval": "1s",
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "limit": 1,
+            "values": true
+          },
+          "text": {
+            "titleSize": 20
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.1",
+        "targets": [
+          {
+            "database": "\"monitoring\"",
+            "datasource": {
+              "type": "grafana-timestream-datasource",
+              "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+            },
+            "measure": "hdi_alarm",
+            "rawQuery": "select * from \"monitoring\".\"vitalsMon\" order by time desc",
+            "refId": "A",
+            "table": "\"vitalsMon\""
+          }
+        ],
+        "title": "Hemodynamic Instability Prediction",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "hdi_alarm"
+                    }
+                  },
+                  "fieldName": "measure_name"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "grafana-timestream-datasource",
+          "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "color": "dark-green",
+                    "index": 0,
+                    "text": "Patient Stable"
+                  },
+                  "1": {
+                    "color": "dark-red",
+                    "index": 1,
+                    "text": "Patient Instable"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-green",
+                  "value": null
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 5,
+          "x": 6,
+          "y": 0
+        },
+        "id": 9,
+        "interval": "1s",
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "limit": 1,
+            "values": true
+          },
+          "text": {
+            "titleSize": 20
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.1",
+        "targets": [
+          {
+            "database": "\"monitoring\"",
+            "datasource": {
+              "type": "grafana-timestream-datasource",
+              "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+            },
+            "measure": "hdi_state",
+            "rawQuery": "select * from \"monitoring\".\"vitalsMon\" ORDER BY time desc",
+            "refId": "A",
+            "table": "\"vitalsMon\""
+          }
+        ],
+        "title": "Hemodynamic Instability State",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "hdi_state"
+                    }
+                  },
+                  "fieldName": "measure_name"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "grafana-timestream-datasource",
+          "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "displayName": "Heart Rate",
+            "mappings": [],
+            "max": 200,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-red",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 50
+                },
+                {
+                  "color": "dark-yellow",
+                  "value": 80
+                },
+                {
+                  "color": "dark-red",
+                  "value": 100
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 4,
+          "x": 11,
+          "y": 0
+        },
+        "id": 1,
+        "interval": "1s",
+        "options": {
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "limit": 1,
+            "values": true
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true
+        },
+        "pluginVersion": "9.5.1",
+        "targets": [
+          {
+            "database": "\"monitoring\"",
+            "datasource": {
+              "type": "grafana-timestream-datasource",
+              "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+            },
+            "measure": "hr_real",
+            "rawQuery": "select * from \"monitoring\".\"vitalsMon\" ORDER BY time desc",
+            "refId": "A",
+            "table": "\"vitalsMon\""
+          }
+        ],
+        "title": "Heart Rate",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "hr_real"
+                    }
+                  },
+                  "fieldName": "measure_name"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "grafana-timestream-datasource",
+          "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "displayName": "O2 Saturation Rate",
+            "mappings": [],
+            "min": 85,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-red",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 9,
+          "x": 15,
+          "y": 0
+        },
+        "id": 2,
+        "interval": "1s",
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "limit": 1,
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.1",
+        "targets": [
+          {
+            "database": "\"monitoring\"",
+            "datasource": {
+              "type": "grafana-timestream-datasource",
+              "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+            },
+            "measure": "o2_real",
+            "rawQuery": "select * from \"monitoring\".\"vitalsMon\" ORDER BY time desc",
+            "refId": "A",
+            "table": "\"vitalsMon\""
+          }
+        ],
+        "title": "O2 Saturation Rate",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "o2_real"
+                    }
+                  },
+                  "fieldName": "measure_name"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "grafana-timestream-datasource",
+          "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "displayName": "Respiratory Rate",
+            "mappings": [],
+            "max": 40,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "dark-red",
+                  "value": 0
+                },
+                {
+                  "color": "dark-green",
+                  "value": 12
+                },
+                {
+                  "color": "dark-red",
+                  "value": 30
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 15,
+          "y": 3
+        },
+        "id": 3,
+        "interval": "1s",
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.1",
+        "targets": [
+          {
+            "database": "\"monitoring\"",
+            "datasource": {
+              "type": "grafana-timestream-datasource",
+              "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+            },
+            "measure": "res_real",
+            "rawQuery": "select * from \"monitoring\".\"vitalsMon\" ORDER BY time desc",
+            "refId": "A",
+            "table": "\"vitalsMon\""
+          }
+        ],
+        "title": "Respiratory Rate",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "res_real"
+                    }
+                  },
+                  "fieldName": "measure_name"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "grafana-timestream-datasource",
+          "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "displayName": "Temperature",
+            "mappings": [],
+            "max": 50,
+            "min": 20,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-red",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 36
+                },
+                {
+                  "color": "green",
+                  "value": 37
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 38
+                },
+                {
+                  "color": "orange",
+                  "value": 39
+                },
+                {
+                  "color": "dark-red",
+                  "value": 40
+                }
+              ]
+            },
+            "unit": "celsius"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 18,
+          "y": 3
+        },
+        "id": 4,
+        "interval": "1s",
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.1",
+        "targets": [
+          {
+            "database": "\"monitoring\"",
+            "datasource": {
+              "type": "grafana-timestream-datasource",
+              "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+            },
+            "measure": "temp_sim",
+            "rawQuery": "select * from \"monitoring\".\"vitalsMon\" ORDER BY time desc",
+            "refId": "A",
+            "table": "\"vitalsMon\""
+          }
+        ],
+        "title": "Temperature",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "temp_sim"
+                    }
+                  },
+                  "fieldName": "measure_name"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "grafana-timestream-datasource",
+          "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "displayName": "pH",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-red",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 7.35
+                },
+                {
+                  "color": "dark-red",
+                  "value": 7.45
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 21,
+          "y": 3
+        },
+        "id": 5,
+        "interval": "1s",
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.1",
+        "targets": [
+          {
+            "database": "\"monitoring\"",
+            "datasource": {
+              "type": "grafana-timestream-datasource",
+              "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+            },
+            "measure": "ph_sim",
+            "rawQuery": "select * from \"monitoring\".\"vitalsMon\" ORDER BY time desc",
+            "refId": "A",
+            "table": "\"vitalsMon\""
+          }
+        ],
+        "title": "pH",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "ph_sim"
+                    }
+                  },
+                  "fieldName": "measure_name"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "grafana-timestream-datasource",
+          "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "line+area"
+              }
+            },
+            "displayName": "sbp",
+            "mappings": [],
+            "max": 200,
+            "min": 50,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "dark-red",
+                  "value": 0
+                },
+                {
+                  "color": "dark-green",
+                  "value": 90
+                },
+                {
+                  "color": "green",
+                  "value": 120
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 130
+                },
+                {
+                  "color": "dark-red",
+                  "value": 140
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 11,
+          "x": 0,
+          "y": 7
+        },
+        "id": 11,
+        "interval": "1s",
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.5.1",
+        "targets": [
+          {
+            "database": "\"monitoring\"",
+            "datasource": {
+              "type": "grafana-timestream-datasource",
+              "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+            },
+            "measure": "sbp_real",
+            "rawQuery": "select * from \"monitoring\".\"vitalsMon\" order by time desc",
+            "refId": "A",
+            "table": "\"vitalsMon\""
+          }
+        ],
+        "title": "Systolic Blood Pressure",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "sbp_real"
+                    }
+                  },
+                  "fieldName": "measure_name"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "grafana-timestream-datasource",
+          "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "displayName": "sbp",
+            "mappings": [],
+            "max": 180,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "dark-red",
+                  "value": 0
+                },
+                {
+                  "color": "dark-green",
+                  "value": 90
+                },
+                {
+                  "color": "green",
+                  "value": 120
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 130
+                },
+                {
+                  "color": "dark-red",
+                  "value": 140
+                }
+              ]
+            },
+            "unit": "mm Hg"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 4,
+          "x": 11,
+          "y": 7
+        },
+        "id": 6,
+        "interval": "1s",
+        "options": {
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "limit": 1,
+            "values": true
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true
+        },
+        "pluginVersion": "9.5.1",
+        "targets": [
+          {
+            "database": "\"monitoring\"",
+            "datasource": {
+              "type": "grafana-timestream-datasource",
+              "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+            },
+            "measure": "sbp_real",
+            "rawQuery": "select * from \"monitoring\".\"vitalsMon\" order by time desc",
+            "refId": "A",
+            "table": "\"vitalsMon\""
+          }
+        ],
+        "title": "Systolic Blood Pressure",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "sbp_real"
+                    }
+                  },
+                  "fieldName": "measure_name"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "grafana-timestream-datasource",
+          "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "line+area"
+              }
+            },
+            "displayName": "dbp",
+            "mappings": [],
+            "max": 110,
+            "min": 30,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "dark-red",
+                  "value": 0
+                },
+                {
+                  "color": "dark-green",
+                  "value": 60
+                },
+                {
+                  "color": "green",
+                  "value": 70
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 80
+                },
+                {
+                  "color": "dark-red",
+                  "value": 90
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 11,
+          "x": 0,
+          "y": 16
+        },
+        "id": 7,
+        "interval": "1s",
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.5.1",
+        "targets": [
+          {
+            "database": "\"monitoring\"",
+            "datasource": {
+              "type": "grafana-timestream-datasource",
+              "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+            },
+            "measure": "dbp_real",
+            "rawQuery": "select * from \"monitoring\".\"vitalsMon\" ORDER BY time desc",
+            "refId": "A",
+            "table": "\"vitalsMon\""
+          }
+        ],
+        "title": "Diastolic Blood Pressure",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "dbp_real"
+                    }
+                  },
+                  "fieldName": "measure_name"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "grafana-timestream-datasource",
+          "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "displayName": "dbp",
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "dark-red",
+                  "value": 0
+                },
+                {
+                  "color": "dark-green",
+                  "value": 60
+                },
+                {
+                  "color": "green",
+                  "value": 70
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 80
+                },
+                {
+                  "color": "dark-red",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "mm Hg"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 4,
+          "x": 11,
+          "y": 16
+        },
+        "id": 10,
+        "interval": "1s",
+        "options": {
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "limit": 1,
+            "values": true
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true
+        },
+        "pluginVersion": "9.5.1",
+        "targets": [
+          {
+            "database": "\"monitoring\"",
+            "datasource": {
+              "type": "grafana-timestream-datasource",
+              "uid": "c3e11eed-1ccf-4894-b308-a7d5f59fbb8f"
+            },
+            "measure": "dbp_real",
+            "rawQuery": "select * from \"monitoring\".\"vitalsMon\" ORDER BY time desc",
+            "refId": "A",
+            "table": "\"vitalsMon\""
+          }
+        ],
+        "title": "Diastolic Blood Pressure",
+        "transformations": [
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": "dbp_real"
+                    }
+                  },
+                  "fieldName": "measure_name"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "gauge"
+      }
+    ],
+    "refresh": "1s",
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "1s",
+        "2s",
+        "3s",
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ]
+    },
+    "timezone": "",
+    "title": "Vital Sign Monitoring",
+    "uid": "f61da47f-517b-45e8-85db-db80f1c53420",
+    "version": 53,
+    "weekStart": ""
+  }

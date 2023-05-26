@@ -1,0 +1,3 @@
+[submodule "vitalSignInjecor_Timestream_Kinesis"]
+	path = vitalSignInjecor_Timestream_Kinesis
+	url = ./aws/ecs/vitalSignInjecor_Timestream_Kinesis
