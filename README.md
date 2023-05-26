@@ -30,43 +30,54 @@ The project leverages cloud-native architecture and AWS cloud and services to br
 ## Prototype
 
 ### Vitalsign dashboard when patient is in a stable state
-![Image Alt Text](./prototype/Stable%20State.png)
+![Image Alt Text](./prototype/pictures/Stable%20State.png)
 
 ### Vitalsign dashboard when hemodynamic instability is predicted (countdown in sec)
-![Image Alt Text](./prototype/Prediction%20Alarm%20Countdown.png)
+![Image Alt Text](./prototype/pictures/Prediction%20Alarm%20Countdown.png)
 
 ### Vitalsign dashboard when patient is in an unstable state
-![Image Alt Text](./prototype/Instable%20State.png)
+![Image Alt Text](./prototype/pictures/Instable%20State.png)
+
+### Anticipated system architecture (not fully implemented)
+![Image Alt Text](./prototype/pictures/AWSArchitectureDiagram.png)
 
 
 ## Project Structure
 
 ```
 .
+├── README.md
 ├── aws
-│   ├── cloudformation-template.json
-│   ├── ecs
-│   │   └── vitalSignInjector
-│   │       ├── Dockerfile
-│   │       ├── main.py
-│   │       └── requirements.txt
-│   ├── grafana
-│   │   └── JSON model
-│   │       └── dashboard.json
-│   └── lambda
-│       ├── invokeVitalSignInjection
-│       │   └── function.py
-│       ├── readVitalSignData
-│       │   └── function.py
-│       └── simulateVitalSignData
-│           ├── function.py
-│           └── python
+│   ├── cloudformation-template.json
+│   ├── ecs
+│   │   └── vitalSignInjector
+│   │       ├── Dockerfile
+│   │       ├── main.py
+│   │       └── requirements.txt
+│   ├── grafana
+│   │   └── JSON model
+│   │       └── dashboard.json
+│   └── lambda
+│       ├── invokeVitalSignInjection
+│       │   └── function.py
+│       ├── readVitalSignData
+│       │   └── function.py
+│       └── simulateVitalSignData
+│           ├── function.py
+│           └── python
 ├── data
-│   ├── data_transform.py
-│   ├── vitals_time.csv
-│   └── vitals_time_labled_demo.csv
-└── prediction_model
-    └── hdi_prediction_model.ipynb
+│   ├── data_transform.py
+│   ├── vitals_time.csv
+│   └── vitals_time_labled_demo.csv
+├── prediction_model
+│   └── hdi_prediction_model.ipynb
+└── prototype
+    ├── Project_Presentation.pdf
+    └── pictures
+        ├── AWSArchitectureDiagram.png
+        ├── Instable State.png
+        ├── Prediction Alarm Countdown.png
+        └── Stable State.png
 ```
 
 ## Setup and Installation
