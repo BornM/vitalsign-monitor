@@ -27,6 +27,18 @@ The project leverages cloud-native architecture and AWS cloud and services to br
 2. **Alarm management system tier**: Applies rules and machine learning models to detect critical values and predict hemodynamic instability.
 3. **Visualization tier**: Presents data and alarms through a self-hosted Grafana instance connected to an AWS Timestream table.
 
+## Prototype
+
+### Vitalsign dashboard when patient is in a stable state
+![Image Alt Text](./prototype/Stable%20State.png)
+
+### Vitalsign dashboard when hemodynamic instability is predicted (countdown in sec)
+![Image Alt Text](./prototype/Prediction%20Alarm%20Countdown.png)
+
+### Vitalsign dashboard when patient is in an unstable state
+![Image Alt Text](./prototype/Instable%20State.png)
+
+
 ## Project Structure
 
 ```
@@ -72,7 +84,7 @@ The project leverages cloud-native architecture and AWS cloud and services to br
 
 6. **Grafana Setup**: Use the Grafana EC2 instance and import the provided `dashboard.json` from the `aws/grafana/JSON model` directory. Connect Grafana to the AWS Timestream database that you created earlier. 
 
-**Make sure to adjsut all code artifacts according to your aws infrastructure (e.e. sqs que names and urls)**
+**Make sure to adjsut all code artifacts according to your aws infrastructure (e.e. sqs que names and urls) and add the data to the s3 bucket**
 
 ### Authors
 
