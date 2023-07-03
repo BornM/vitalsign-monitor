@@ -102,12 +102,7 @@ The project leverages cloud-native architecture and AWS cloud and services to br
 * Maximilian Bornstädt - Maximilian.Bornstaedt@stud.srh-campus-berlin.de
 * Varsha Balaji - Varsha.Balaji@stud.srh-campus-berlin.de
 * Nibedita Sahoo - Nibedita.Sahoo@stud.srh-campus-berlin.de
-
-## Acknowledgments
-
-We would like to express our gratitude to:
-
-* Prof. Gerrit Tamm, our academic supervisor.
-* Prof. Philipp Landgraf, our professional supervisor.
+* Prof. Gerrit Tamm - gerrit.tamm@srh.de
+* Prof. Philipp Landgraf - philipp.landgraf@charite.de
 
 Thank you for your interest in the 'Reinvent Vital Sign Monitoring' project!
